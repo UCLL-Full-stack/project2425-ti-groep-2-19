@@ -29,10 +29,6 @@ const Coaches: React.FC = () => {
         getCoaches();
     }, []);
 
-    const handleAddCoach = () => {
-        router.push('/coaches/addCoach?teamId=' + teamId);
-    };
-
     return (
         <>
             <Head>
@@ -48,12 +44,6 @@ const Coaches: React.FC = () => {
                         setCoaches={setCoaches}
                     />
                 </section>
-                <button
-                    onClick={handleAddCoach}
-                    className="mt-8 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                >
-                    Add Coach
-                </button>
             </main>
         </>
     );
