@@ -15,11 +15,13 @@ export type Player = {
     id?: number;
     number: number;
     user: User;
+    teamId: number;
 };
 
 export type Coach = {
     id: number;
     user: User;
+    teamId: number;
 };
 
 export type User = {

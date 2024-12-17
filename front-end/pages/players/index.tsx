@@ -1,5 +1,6 @@
 import PlayerOverviewTable from "@/components/players/playerOverviewTable";
 import Header from "@/components/header";
+import Header2 from "@/components/header2";
 import PlayerService from "@/services/PlayerService";
 import { Player } from "@/types";
 import Head from "next/head";
@@ -29,7 +30,7 @@ const Players: React.FC = () => {
     }, []);
 
     const handleAddPlayer = () => {
-        router.push('/players/addPlayer');
+        router.push('/players/addPlayer?teamId=' + teamId);
     };
 
     return (
@@ -38,6 +39,7 @@ const Players: React.FC = () => {
                 <title>Players</title>
             </Head>
             <Header />
+            <Header2 />
             <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
                 <h1 className="text-4xl font-bold mb-8">Players</h1>
                 <section className="w-full max-w-4xl">
@@ -46,12 +48,6 @@ const Players: React.FC = () => {
                         setPlayers={setPlayers}
                     />
                 </section>
-                <button
-                    onClick={handleAddPlayer}
-                    className="mt-8 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-                >
-                    Add Player
-                </button>
             </main>
         </>
     );

@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 
     useEffect(() => {
-        setLoggedInUser(localStorage.getItem("loggedInUser"));
+        return setLoggedInUser(localStorage.getItem("loggedInUser"));
     }, []);
 
     const handleClick = () => {
