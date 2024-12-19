@@ -8,8 +8,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/Home.module.css";
 import withAuth from '@/components/withAuth';
+import {jwtDecode, JwtPayload} from "jwt-decode";
+
+interface CustomJwtPayload extends JwtPayload {
+    role: string;
+}
 
 const Competitions: React.FC = () => {
+    const [userRole, setUserRole] = useState<string | null>(null);
     const [competitions, setCompetitions] = useState<Competition[]>([]);
     const [selectedCompetition, setSelectedCompetition] = useState<Competition | null>(null);
     const router = useRouter();
@@ -24,6 +30,11 @@ const Competitions: React.FC = () => {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            const decodedToken = jwtDecode<CustomJwtPayload>(token);
+            setUserRole(decodedToken.role);
+        }
         getCompetitions();
     }, []);
 
@@ -44,6 +55,7 @@ const Competitions: React.FC = () => {
                         competitions={competitions}
                         setCompetitions={setCompetitions}
                         selectCompetition={setSelectedCompetition}
+                        userRole={userRole}
                     />
                 </section>
                 {selectedCompetition && (
@@ -52,12 +64,12 @@ const Competitions: React.FC = () => {
                         <TeamOverviewTable competition={selectedCompetition} />
                     </section>
                 )}
-                <button
+                {userRole === "admin" && (<button
                     onClick={handleAddCompetition}
                     className="mt-8 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
                     Add Competition
-                </button>
+                </button>)}
             </main>
         </>
     );

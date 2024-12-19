@@ -8,9 +8,10 @@ interface CompetitionOverviewTableProps {
     competitions: Competition[];
     setCompetitions: (competitions: Competition[]) => void;
     selectCompetition: (competition: Competition) => void;
+    userRole: string | null;
 }
 
-const CompetitionOverviewTable: React.FC<CompetitionOverviewTableProps> = ({ competitions, setCompetitions, selectCompetition }) => {
+const CompetitionOverviewTable: React.FC<CompetitionOverviewTableProps> = ({ competitions, setCompetitions, selectCompetition, userRole }) => {
     const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCompetition, setSelectedCompetition] = useState<Competition | null>(null);
@@ -38,7 +39,7 @@ const CompetitionOverviewTable: React.FC<CompetitionOverviewTableProps> = ({ com
                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-6 text-left">Name</th>
                         <th className="py-3 px-6 text-left">Number of teams</th>
-                        <th className="py-3 px-6 text-center">Edit</th>
+                        {userRole==="admin" && (<th className="py-3 px-6 text-center">Edit</th>)}
                     </tr>
                 </thead>
                 <tbody className="text-gray-600 text-sm font-light">
@@ -46,7 +47,7 @@ const CompetitionOverviewTable: React.FC<CompetitionOverviewTableProps> = ({ com
                         <tr key={competition.id} className="border-b border-gray-200 hover:bg-gray-100" onClick={() => selectCompetition(competition)}>
                             <td className="py-3 px-6 text-left cursor-pointer hover:underline">{competition.name}</td>
                             <td className="py-3 px-6 text-left">{competition.teams.length}</td>
-                            <td className="py-3 px-6 text-center">
+                            {userRole==="admin" && (<td className="py-3 px-6 text-center">
                                 <button
                                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
                                     onClick={(e) => {
@@ -56,7 +57,7 @@ const CompetitionOverviewTable: React.FC<CompetitionOverviewTableProps> = ({ com
                                 >
                                     Edit
                                 </button>
-                            </td>
+                            </td>)}
                         </tr>
                     ))}
                 </tbody>
