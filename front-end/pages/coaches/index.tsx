@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CoachService from "@/services/CoachServive";
+import withAuth from '@/components/withAuth';
 
 const Coaches: React.FC = () => {
     const [coaches, setCoaches] = useState<Coach[]>([]);
@@ -49,4 +50,4 @@ const Coaches: React.FC = () => {
     );
 };
 
-export default Coaches;
+export default withAuth(Coaches);

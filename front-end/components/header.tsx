@@ -6,11 +6,12 @@ const Header: React.FC = () => {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 
     useEffect(() => {
-        return setLoggedInUser(localStorage.getItem("loggedInUser"));
+        return setLoggedInUser(localStorage.getItem("name"));
     }, []);
 
     const handleClick = () => {
-        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("name");
+        localStorage.removeItem("authToken");
         setLoggedInUser(null);
     };
     return (
@@ -23,9 +24,10 @@ const Header: React.FC = () => {
                     <Link href="/" className="text-lg hover:text-orange-500">
                         Home
                     </Link>
-                    <Link href="/competitions" className="text-lg hover:text-orange-500">
-                        Competitions
-                    </Link>
+                    {loggedInUser && (
+                        <Link href="/competitions" className="text-lg hover:text-orange-500">
+                            Competitions
+                        </Link>)}
                     {!loggedInUser && (
                         <Link
                             href="/login"
@@ -33,15 +35,6 @@ const Header: React.FC = () => {
                         >
                             Login
                         </Link>
-                    )}
-                    {!loggedInUser && (
-                        <Link
-                            href="/register"
-                            className="text-lg hover:text-orange-500"
-                        >
-                            Register
-                        </Link>
-
                     )}
                     {loggedInUser && (
                         <div className="text-lg">

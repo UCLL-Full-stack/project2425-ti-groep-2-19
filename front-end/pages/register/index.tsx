@@ -2,12 +2,13 @@ import Head from "next/head";
 import Header from "@/components/header";
 import UserRegisterForm from "@/components/users/UserRegisterForm";
 import React from "react";
+import withAuth from '@/components/withAuth';
 
 const Register: React.FC = () => {
     return (
         <>
             <Head>
-                <title>Register user</title>
+                <title>Register player</title>
             </Head>
             <Header />
             <main>
@@ -18,4 +19,4 @@ const Register: React.FC = () => {
         </>
     );
 };
-export default Register;
+export default withAuth(Register);

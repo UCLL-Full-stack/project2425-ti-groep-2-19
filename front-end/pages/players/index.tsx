@@ -6,6 +6,7 @@ import { Player, User } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import withAuth from '@/components/withAuth';
 
 const Players: React.FC = () => {
     const [players, setPlayers] = useState<Player[]>([]);
@@ -71,4 +72,4 @@ const Players: React.FC = () => {
     );
 };
 
-export default Players;
+export default withAuth(Players);

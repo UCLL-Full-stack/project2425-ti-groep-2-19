@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import CompetitionService from '@/services/CompetitionService';
 import Head from 'next/head';
+import withAuth from '@/components/withAuth';
 
 const AddCompetition: React.FC = () => {
     const [name, setName] = useState('');
@@ -63,4 +64,4 @@ const AddCompetition: React.FC = () => {
     );
 };
 
-export default AddCompetition;
+export default withAuth(AddCompetition);

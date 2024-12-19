@@ -7,6 +7,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/Home.module.css";
+import withAuth from '@/components/withAuth';
 
 const Competitions: React.FC = () => {
     const [competitions, setCompetitions] = useState<Competition[]>([]);
@@ -62,4 +63,4 @@ const Competitions: React.FC = () => {
     );
 };
 
-export default Competitions;
+export default withAuth(Competitions);
