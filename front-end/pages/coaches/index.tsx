@@ -28,7 +28,7 @@ const Coaches: React.FC = () => {
 
     useEffect(() => {
         getCoaches();
-    }, []);
+    }, [teamId]);
 
     return (
         <>

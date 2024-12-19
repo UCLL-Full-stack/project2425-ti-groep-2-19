@@ -33,15 +33,7 @@ const Players: React.FC = () => {
 
     useEffect(() => {
         getPlayers();
-    }, []);
-
-    const handleAddPlayer = () => {
-        router.push('/players/addPlayer?teamId=' + teamId);
-    };
-
-    const handleRegister = () => {
-        router.push('/register');
-    };
+    }, [teamId]);
 
     return (
         <>
@@ -57,14 +49,6 @@ const Players: React.FC = () => {
                         players={players}
                         setPlayers={setPlayers}
                     />
-                    {loggedInUser?.role === 'coach' && (
-                        <button
-                            onClick={handleRegister}
-                            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-                        >
-                            Register
-                        </button>
-                    )}
                 </section>
 
             </main>
