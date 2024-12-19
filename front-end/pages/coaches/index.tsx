@@ -16,7 +16,7 @@ const Coaches: React.FC = () => {
         try {
             const data = await CoachService.getAllCoaches();
             if (teamId) {
-                setCoaches(data.filter((coach: Coach) => coach.teamId === Number(teamId)));
+                setCoaches(data.filter((coach: Coach) => coach.team.id === Number(teamId)));
             } else {
                 setCoaches(data);
             }

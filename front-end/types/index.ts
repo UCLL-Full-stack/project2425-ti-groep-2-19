@@ -19,6 +19,7 @@ export type Player = {
 };
 
 export type Coach = {
+    team: any;
     id: number;
     user: User;
     teamId: number;

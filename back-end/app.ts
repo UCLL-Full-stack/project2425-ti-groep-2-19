@@ -49,6 +49,6 @@ app.listen(port || 3000, () => {
 });
 
 
-// app.use(
-//   expressjwt({ secret: process.env.JWT_SECRET || 'default_secret', algorithms: ['HS256'] })
-// )
+app.use(
+  expressjwt({ secret: process.env.JWT_SECRET || 'default_secret', algorithms: ['HS256'] })
+)

@@ -65,6 +65,7 @@ const RegisterForm: React.FC = () => {
                     type: "success",
                 },
             ]);
+            router.push("/login");
         }
     };
 
