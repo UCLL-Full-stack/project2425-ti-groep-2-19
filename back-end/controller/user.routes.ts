@@ -62,7 +62,6 @@ import express, { NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
 import { UserInput, AuthenticationRequest } from '../types/index';
 
-
 const userRouter = express.Router();
 
 /**
@@ -113,18 +112,15 @@ userRouter.get(
  *       500:
  *         description: Internal server error
  */
-userRouter.post(
-    '/signup',
-    async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const userInput: UserInput = req.body;
-            const newUser = await userService.createUser(userInput);
-            res.status(200).json(newUser);
-        } catch (error) {
-            next(error);
-        }
+userRouter.post('/signup', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userInput: UserInput = req.body;
+        const newUser = await userService.createUser(userInput);
+        res.status(200).json(newUser);
+    } catch (error) {
+        next(error);
     }
-);
+});
 
 /**
  * @swagger
@@ -145,17 +141,14 @@ userRouter.post(
  *       500:
  *         description: Internal server error
  */
-userRouter.post(
-    '/login',
-    async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const { name, password}: AuthenticationRequest = req.body;
-            const authResponse = await userService.authenticate(name, password);
-            res.status(200).json(authResponse);
-        } catch (error) {
-            next(error);
-        }
+userRouter.post('/login', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { name, password }: AuthenticationRequest = req.body;
+        const authResponse = await userService.authenticate(name, password);
+        res.status(200).json(authResponse);
+    } catch (error) {
+        next(error);
     }
-);
+});
 
 export default userRouter;

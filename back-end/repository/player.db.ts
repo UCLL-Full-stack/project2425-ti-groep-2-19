@@ -14,8 +14,12 @@ const getAllPlayers = async (): Promise<Player[]> => {
         },
     });
 
-    return playersPrisma.map(playerPrisma => 
-        Player.from(playerPrisma, new User({ ...playerPrisma.user, role: playerPrisma.user.role as Role }), new Team(playerPrisma.team))
+    return playersPrisma.map((playerPrisma) =>
+        Player.from(
+            playerPrisma,
+            new User({ ...playerPrisma.user, role: playerPrisma.user.role as Role }),
+            new Team(playerPrisma.team)
+        )
     );
 };
 

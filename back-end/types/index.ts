@@ -15,16 +15,16 @@ type TeamInput = {
 
 type PlayerInput = {
     id?: number;
-    user: UserInput;
-    team: TeamInput;
+    userId: number;
+    teamId: number;
     number: number;
-}
+};
 
 type CoachInput = {
     id?: number;
     user: UserInput;
     team: TeamInput;
-}
+};
 
 type UserInput = {
     id?: number;
@@ -44,7 +44,7 @@ type AuthenticationRequest = {
     name: string;
     password: string;
     role: Role;
-}
+};
 
 export {
     CompetitionInput,
@@ -54,5 +54,5 @@ export {
     UserInput,
     Role,
     AuthenticationResponse,
-    AuthenticationRequest
+    AuthenticationRequest,
 };

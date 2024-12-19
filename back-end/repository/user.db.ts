@@ -55,7 +55,6 @@ const createUser = async ({ name, password, email, role }: UserInput): Promise<U
         throw new Error('Database error. See server log for details.');
     }
 };
-
 export default {
     getAllUsers,
     getUserById,
