@@ -3,6 +3,7 @@ import { StatusMessage } from "@/types";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import HomeOverview from "../homeOverview";
 
 const UserLoginForm: React.FC = () => {
     const [name, setName] = useState("");
@@ -126,6 +127,7 @@ const UserLoginForm: React.FC = () => {
                     Login
                 </button>
             </form>
+            <HomeOverview />
         </>
     );
 };
