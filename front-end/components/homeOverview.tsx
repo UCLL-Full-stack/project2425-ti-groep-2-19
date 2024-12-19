@@ -2,9 +2,9 @@ import React from 'react';
 
 const HomeOverview: React.FC = () => {
     const users = [
-        { name: 'LeBron James', password: 'password123' },
-        { name: 'Frank Vogel', password: 'password123' },
-        { name: 'admin', password: 'password456' },
+        { name: 'LeBron James', password: 'password123', role: 'player' },
+        { name: 'Frank Vogel', password: 'password123', role: 'coach' },
+        { name: 'admin', password: 'password456', role: 'admin' },
     ];
 
     return (
@@ -15,6 +15,7 @@ const HomeOverview: React.FC = () => {
                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-6 text-left">Name</th>
                         <th className="py-3 px-6 text-left">Password</th>
+                        <th className="py-3 px-6 text-center">Role</th>
                     </tr>
                 </thead>
                 <tbody className="text-gray-600 text-sm font-light">
@@ -22,6 +23,7 @@ const HomeOverview: React.FC = () => {
                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
                             <td className="py-3 px-6 text-left">{user.name}</td>
                             <td className="py-3 px-6 text-left">{user.password}</td>
+                            <td className="py-3 px-6 text-center">{user.role}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -2,15 +2,20 @@ import PlayerOverviewTable from "@/components/players/playerOverviewTable";
 import Header from "@/components/header";
 import Header2 from "@/components/header2";
 import PlayerService from "@/services/PlayerService";
-import { Player } from "@/types";
+import { Player, User } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const Players: React.FC = () => {
     const [players, setPlayers] = useState<Player[]>([]);
+    const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
+    const [userRole, setUserRole] = useState<String | null>(null);
     const router = useRouter();
     const { teamId } = router.query;
+    useEffect(() => {
+        return setUserRole(localStorage.getItem("userRole"));
+    }, []);
 
     const getPlayers = async () => {
         try {
@@ -33,6 +38,10 @@ const Players: React.FC = () => {
         router.push('/players/addPlayer?teamId=' + teamId);
     };
 
+    const handleRegister = () => {
+        router.push('/register');
+    };
+
     return (
         <>
             <Head>
@@ -47,7 +56,16 @@ const Players: React.FC = () => {
                         players={players}
                         setPlayers={setPlayers}
                     />
+                    {loggedInUser?.role === 'coach' && (
+                        <button
+                            onClick={handleRegister}
+                            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                        >
+                            Register
+                        </button>
+                    )}
                 </section>
+
             </main>
         </>
     );

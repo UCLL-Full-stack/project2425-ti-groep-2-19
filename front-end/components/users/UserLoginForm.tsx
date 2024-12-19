@@ -48,6 +48,7 @@ const UserLoginForm: React.FC = () => {
 
         try {
             const response = await UserService.loginUser({ name, password });
+            const data = await response.json();
             if (!response.ok) {
                 setLoginError('Invalid username or password');
                 return;
@@ -60,7 +61,8 @@ const UserLoginForm: React.FC = () => {
                 },
             ]);
 
-            localStorage.setItem("loggedInUser", name);
+            localStorage.setItem("authToken", data.token);
+            localStorage.setItem("name", data.name);
 
             setTimeout(() => {
                 router.push("/");
@@ -72,7 +74,7 @@ const UserLoginForm: React.FC = () => {
 
     return (
         <>
-            <h3 className="px-0">Login</h3>
+            <h3 className="text-2xl font-bold mb-4">Login</h3>
             {statusMessages && (
                 <div className="row">
                     <ul className="list-none mb-3 mx-auto">
