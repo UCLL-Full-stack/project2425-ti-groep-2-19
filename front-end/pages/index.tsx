@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Header from '@/components/header';
+import HomeOverview from '@/components/homeOverview';
 import styles from '@/styles/Home.module.css';
 import { User } from '@/types';
 import { useEffect, useState } from 'react';
@@ -22,8 +23,9 @@ const Home: React.FC = () => {
       <Header />
       <main className={styles.main}>
         <span>
-          <h1>Welcome, {loggedInUser}!</h1>
+          <h1>Welcome to the basketball app!</h1>
         </span>
+      <HomeOverview />
       </main>
     </>
   );

@@ -93,6 +93,15 @@ const main = async () => {
             }
         }
     }
+    const adminPassword = await bcrypt.hash('password456', 12);
+    await prisma.user.create({
+        data: {
+            name: 'admin',
+            email: 'admin@admin.com',
+            password: adminPassword,
+            role: 'admin'
+        }
+    });
 };
 
 main()
