@@ -7,6 +7,11 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import withAuth from '@/components/withAuth';
+import {jwtDecode, JwtPayload} from "jwt-decode";
+
+interface CustomJwtPayload extends JwtPayload {
+    role: string;
+}
 
 const Players: React.FC = () => {
     const [players, setPlayers] = useState<Player[]>([]);
@@ -14,9 +19,6 @@ const Players: React.FC = () => {
     const [userRole, setUserRole] = useState<String | null>(null);
     const router = useRouter();
     const { teamId } = router.query;
-    useEffect(() => {
-        return setUserRole(localStorage.getItem("userRole"));
-    }, []);
 
     const getPlayers = async () => {
         try {
@@ -31,7 +33,16 @@ const Players: React.FC = () => {
         }
     };
 
+    const handleAddPlayer = () => {
+        router.push('/players/addPlayer?teamId=' + teamId);
+    };
+
     useEffect(() => {
+        const token = localStorage.getItem('authToken');
+                if (token) {
+                    const decodedToken = jwtDecode<CustomJwtPayload>(token);
+                    setUserRole(decodedToken.role);
+                }
         getPlayers();
     }, [teamId]);
 
@@ -50,7 +61,12 @@ const Players: React.FC = () => {
                         setPlayers={setPlayers}
                     />
                 </section>
-
+                {userRole === "coach" && (<button
+                    onClick={handleAddPlayer}
+                    className="mt-8 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                    Add Player
+                </button>)}
             </main>
         </>
     );

@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 import UserService from "@/services/UserService";
 import {Role, StatusMessage} from "@/types";
 import classNames from "classnames";
+import PlayerService from "@/services/PlayerService";
 
 const RegisterForm: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [role] = useState<Role>("player");
+    const [number, setNumber] = useState<number>(0);
 
     const [emailError, setEmailError] = useState<string>("");
     const [nameError, setNameError] = useState<string>("");
@@ -46,7 +48,6 @@ const RegisterForm: React.FC = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-
         if (validateForm()) {
             const user = { email, name, password, role};
             console.log(user)
@@ -71,7 +72,7 @@ const RegisterForm: React.FC = () => {
 
     return (
         <>
-            <h3 className="px-0">Login</h3>
+            <h3 className="px-0">Register Player</h3>
             {statusMessages && (
                 <div className="row">
                     <ul className="list-none mb-3 mx-auto">
